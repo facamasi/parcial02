@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateVentasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vehiculo_id');
-        $table->unsignedBigInteger('cliente_id');
-        $table->foreign('vehiculo_id')->references('id')->on('vehiculos')->onDelete('cascade');
-        $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
-        $table->date('fecha_venta');
-        $table->decimal('precio_final', 10, 2);
-        $table->timestamps();
+            $table->unsignedBigInteger('cliente_id');
+            $table->foreign('vehiculo_id')->references('id')->on('vehiculos')->onDelete('cascade');
+            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
+            $table->date('fecha_venta');
+            $table->decimal('precio_final', 10, 2);
+            $table->timestamps();
         });
     }
 
@@ -30,4 +30,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('ventas');
     }
-}; 
+}
+
