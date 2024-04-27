@@ -3,62 +3,68 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Venta;
+use Illuminate\Support\Facades\DB;
+use App\Models\Venta; // Agrega el uso del modelo Venta
 
 class VentaController extends Controller
 {
+    /**
+     * Muestra una lista de ventas.
+     */
     public function index()
     {
-        $ventas = Venta::all();
-        return view('ventas.index', compact('ventas'));
+        $ventas = Venta::all(); // Obtener todas las ventas
+        return view('ventas.index', ['ventas' => $ventas]);
     }
 
+    /**
+     * Muestra el formulario para crear una nueva venta.
+     */
     public function create()
     {
+        // Aquí podrías obtener datos adicionales si fuera necesario para el formulario de creación
         return view('ventas.create');
     }
 
+    /**
+     * Almacena una nueva venta en la base de datos.
+     */
     public function store(Request $request)
     {
-        // Validar los datos del formulario
-        $request->validate([
-            // Aquí coloca las reglas de validación para los campos de la venta
-        ]);
-
-        // Crear una nueva venta en la base de datos
-        Venta::create($request->all());
-
-        // Redirigir a la lista de ventas con un mensaje de éxito
-        return redirect()->route('ventas.index')->with('success', 'La venta ha sido creada correctamente.');
+        // Lógica para almacenar la venta en la base de datos
     }
 
+    /**
+     * Muestra la venta especificada.
+     */
+    public function show($id)
+    {
+        // Lógica para mostrar una venta específica
+    }
+
+    /**
+     * Muestra el formulario para editar una venta.
+     */
     public function edit($id)
     {
-        $venta = Venta::find($id);
-        return view('ventas.edit', compact('venta'));
+        // Lógica para obtener y mostrar el formulario de edición de una venta
     }
 
+    /**
+     * Actualiza la venta especificada en la base de datos.
+     */
     public function update(Request $request, $id)
     {
-        // Validar los datos del formulario
-        $request->validate([
-            // Aquí coloca las reglas de validación para los campos de la venta
-        ]);
-
-        // Actualizar la venta en la base de datos
-        Venta::find($id)->update($request->all());
-
-        // Redirigir a la lista de ventas con un mensaje de éxito
-        return redirect()->route('ventas.index')->with('success', 'La venta ha sido actualizada correctamente.');
+        // Lógica para actualizar una venta en la base de datos
     }
 
+    /**
+     * Elimina la venta especificada de la base de datos.
+     */
     public function destroy($id)
     {
-        // Eliminar la venta de la base de datos
-        Venta::find($id)->delete();
-
-        // Redirigir a la lista de ventas con un mensaje de éxito
-        return redirect()->route('ventas.index')->with('success', 'La venta ha sido eliminada correctamente.');
+        // Lógica para eliminar una venta de la base de datos
     }
 }
+
 
